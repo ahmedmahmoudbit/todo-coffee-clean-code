@@ -1,0 +1,16 @@
+{
+  "name": "Favorite coffee",
+  "add": "addition",
+  "suger": "How many tablespoons of sugar do you prefer?",
+  "select_coffee": "Choose your favorite mushroom",
+  "moka": "Mocha",
+  "coffee_black": "Black coffee",
+  "coffee_latih": "Latte",
+  "name_coffee": "name your coffee ?",
+  "language": "Change language",
+  "arabic": "Arabic",
+  "english": "English",
+  "edit": "Edit",
+  "delete": "delete",
+  "close": "close"
+}
