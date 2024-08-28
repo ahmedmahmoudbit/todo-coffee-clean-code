@@ -136,10 +136,8 @@ extension ExtendeNavigator on BuildContext {
 }
 
 extension NumberExtension on num {
-  // borderRadius : 8.radius
   BorderRadius get radius => BorderRadius.circular(toDouble());
 
-  // Future.delayed(1.duration)
   Duration get duration => Duration(milliseconds: toInt());
 }
 
