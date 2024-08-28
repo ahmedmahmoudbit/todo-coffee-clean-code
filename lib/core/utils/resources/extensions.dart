@@ -45,7 +45,7 @@ extension MediaQueryValues on BuildContext {
 
   Color get gray3Color => ColorManager.greyText3;
 
-  Color get whiteColor => Theme.of(this).colorScheme.inversePrimary;
+  Color get errorColor => Theme.of(this).colorScheme.onPrimaryFixed;
 
   ThemeData get theme => Theme.of(this);
 

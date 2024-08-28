@@ -13,6 +13,7 @@ class ColorSchemeLight {
     // gray txt 3
     // surfaceDim: ColorManager.greyText3,
     // select container shadow
+    onPrimaryFixed: Color(0xffed3737),
     onSecondary: Color(0xff46BDFA),
 
     // Gradient color button

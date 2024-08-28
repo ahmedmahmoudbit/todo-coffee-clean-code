@@ -25,12 +25,11 @@ class BuildContainer extends StatefulWidget {
 }
 
 class _BuildContainerState extends State<BuildContainer> {
-  // late MainBloc bloc;
 
   @override
   void initState() {
-    // bloc = context.read<MainBloc>();
-    super.initState();
+  super.initState();
+
   }
 
   @override
@@ -46,10 +45,10 @@ class _BuildContainerState extends State<BuildContainer> {
             color: Theme.of(context).canvasColor,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: widget.indexBloc == widget.index ?
-              Theme.of(context).primaryColor :
-              Theme.of(context).scaffoldBackgroundColor,
-              width: widget.indexBloc == widget.index ? 3 : 0,
+              color: widget.indexBloc == widget.index
+                  ? Theme.of(context).primaryColor
+                  : Colors.transparent,
+              width: 2,
             ),
           ),
           child: Padding(

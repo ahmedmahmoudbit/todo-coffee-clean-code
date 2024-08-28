@@ -15,31 +15,32 @@ import '../../firebase_options.dart';
 final di = GetIt.instance;
 
 class Injector {
-  static void init() async {
-    /// Bloc
+  static Future<void> init() async {
+    /// تهيئة Firebase
+    final firebase = await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    di.registerLazySingleton(() => firebase);
+
+    /// تهيئة Hive
+    final appDocumentDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDocumentDir.path);
+
+    // تسجيل الـ Adapter الخاص بـ Hive
+    Hive.registerAdapter(CoffeeModelEntityAdapter());
+
+    // فتح صندوق Hive
+    await Hive.openBox<CoffeeModelEntity>('coffeeBox');
+
+    /// تسجيل Bloc
     di.registerFactory(() => HomeCubit(repository: di()));
 
-    /// Repository.
-    di.registerLazySingleton<HomeRepositoryBase>(() => HomeRepository(firebaseDataSource: di<HomeDS>(),hiveDataSource: di<HiveCoffeeDataSource>()));
+    /// تسجيل Repository
+    di.registerLazySingleton<HomeRepositoryBase>(() => HomeRepository(
+      firebaseDataSource: di<HomeDS>(),
+      hiveDataSource: di<HiveCoffeeDataSource>(),
+    ));
 
-    /// Data Sources.
+    /// تسجيل Data Sources
     di.registerLazySingleton<HomeDS>(() => HomeDS());
     di.registerLazySingleton<HiveCoffeeDataSource>(() => HiveCoffeeDataSource());
-
-    /// Remote Request Manager.
-    // injector.registerLazySingleton<RemoteHelper>(() => DioImplementation());
-    // تهيئة Hive
-    // final appDocumentDir = await getApplicationDocumentsDirectory();
-    // Hive.init(appDocumentDir.path);
-    //
-    // // تسجيل الـ Adapter الخاص بـ Hive
-    // Hive.registerAdapter(CoffeeModelEntityAdapter());
-    //
-    // // فتح صندوق Hive
-    // await Hive.openBox<CoffeeModelEntity>('coffeeBox');
-    //
-    // final firebase = await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-    // di.registerLazySingleton(() => firebase);
-
   }
 }

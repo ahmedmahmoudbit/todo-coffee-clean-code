@@ -1,4 +1,3 @@
-
 import 'package:once/once.dart';
 import 'package:unicode/features/home/data/models/coffee_model_entity.dart';
 
@@ -10,18 +9,21 @@ class HomeRepository implements HomeRepositoryBase {
   final HomeDS firebaseDataSource;
   final HiveCoffeeDataSource hiveDataSource;
 
-  HomeRepository({required this.firebaseDataSource,required this.hiveDataSource});
+  HomeRepository(
+      {required this.firebaseDataSource, required this.hiveDataSource});
 
   @override
   Future<List<CoffeeModelEntity>> getAllCoffees() async {
-    List<CoffeeModelEntity> remoteCoffees;
-    try {
-      Once.runCustom('6h', callback: () async {
-        remoteCoffees = await firebaseDataSource.fetchCoffees();
-      }, duration: const Duration(hours: 6));
-    } catch (_) {
-    }
-    remoteCoffees = await hiveDataSource.getCoffees();
+    List<CoffeeModelEntity> remoteCoffees = [];
+    await Once.runCustom('6h',
+        callback: () async {
+          remoteCoffees = await firebaseDataSource.fetchCoffees();
+          hiveDataSource.saveCoffees(remoteCoffees);
+        },
+        duration: const Duration(hours: 6),
+        fallback: () async {
+          remoteCoffees =  await hiveDataSource.getCoffees();
+        });
     return remoteCoffees;
   }
 
@@ -41,7 +43,4 @@ class HomeRepository implements HomeRepositoryBase {
     await hiveDataSource.removeCoffee(index);
     await firebaseDataSource.deleteCoffee(index);
   }
-
-
-
 }

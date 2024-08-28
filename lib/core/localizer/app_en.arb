@@ -11,6 +11,7 @@
   "arabic": "Arabic",
   "english": "English",
   "edit": "Edit",
-  "delete": "delete",
-  "close": "close"
+  "close": "close",
+  "delete_sure": "Are you sure you want to delete this item?",
+  "delete": "Delete"
 }
