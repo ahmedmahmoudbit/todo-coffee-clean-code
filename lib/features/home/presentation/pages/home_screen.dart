@@ -6,6 +6,7 @@ import 'package:unicode/core/utils/resources/extensions.dart';
 import 'package:unicode/core/utils/shared_widgets/my_text.dart';
 import 'package:unicode/features/home/presentation/manager/home_cubit.dart';
 import 'package:unicode/features/home/presentation/widgets/add_order.dart';
+import '../../domain/use_cases/bottom_sheep.dart';
 import '../widgets/build_items_home.dart';
 import '../widgets/change_language.dart';
 
@@ -38,8 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: IconButton(
           icon: const Icon(Icons.add_circle_outline_rounded),
           onPressed: () {
-            AddOrder()
-                .AddOrderBottomSheet(context: context, provider: provider);
+            showAddOrderBottomSheet(context: context, provider: provider);
           },
         ),
         actions: [
@@ -57,33 +57,33 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(10.0),
             child: state.maybeWhen(
                 CoffeeGetData: (data) => ListView.separated(
-                      itemCount: data.length,
-                      separatorBuilder: (context, index) {
-                        return 10.verticalSpace;
-                      },
-                      itemBuilder: (context, index) {
-                        return BuildItemsHome(
-                          index: data[index].index,
-                          name: data[index].name,
-                          cubit: cubit,
-                        );
-                      },
-                    ),
+                  itemCount: data.length,
+                  separatorBuilder: (context, index) {
+                    return 10.verticalSpace;
+                  },
+                  itemBuilder: (context, index) {
+                    return BuildItemsHome(
+                      index: data[index].index,
+                      name: data[index].name,
+                      cubit: cubit,
+                    );
+                  },
+                ),
                 orElse: () => Skeletonizer(
-                      enabled: true,
-                      child: ListView.builder(
-                        itemCount: 7,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              title: Text('Item number $index as title'),
-                              subtitle: const Text('Subtitle here'),
-                              trailing: const Icon(Icons.ac_unit),
-                            ),
-                          );
-                        },
-                      ),
-                    )),
+                  enabled: true,
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          title: Text('-----------------'),
+                          subtitle: const Text('---------------'),
+                          trailing: const Icon(Icons.ac_unit),
+                        ),
+                      );
+                    },
+                  ),
+                )),
           );
         },
       ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:once/once.dart';
 import 'package:unicode/features/home/data/models/coffee_model_entity.dart';
 
@@ -11,6 +12,7 @@ class HomeRepository implements HomeRepositoryBase {
 
   HomeRepository(
       {required this.firebaseDataSource, required this.hiveDataSource});
+
 
   @override
   Future<List<CoffeeModelEntity>> getAllCoffees() async {
@@ -26,6 +28,8 @@ class HomeRepository implements HomeRepositoryBase {
         });
     return remoteCoffees;
   }
+
+
 
   @override
   Future<void> addCoffee(CoffeeModelEntity coffee) async {

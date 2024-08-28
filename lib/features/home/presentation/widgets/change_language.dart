@@ -5,6 +5,8 @@ import 'package:unicode/core/cubit/main_cubit.dart';
 import 'package:unicode/core/utils/resources/extensions.dart';
 import 'package:unicode/core/utils/resources/resources_exporter.dart';
 
+import '../../../../todo.dart';
+import '../../domain/use_cases/change_language.dart';
 import 'build_container.dart';
 
 class ChangeLanguageUC {
@@ -32,55 +34,49 @@ class ChangeLanguageUC {
               topRight: Radius.circular(10.0),
             ),
           ),
-          child: BlocProvider(
-            create: (context) => MainCubit(),
-            child: Padding(
-              padding: EdgeInsets.all(context.width * 0.04),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: context.height * 0.25,
-                    width: context.width,
-                    child: Center(
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        separatorBuilder: (_, index) => 10.horizontalSpace,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 2,
-                        itemBuilder: (_, index) => SizedBox(
-                          width: 140.w,
-                          child: BuildContainer(
-                            indexBloc: context.read<MainCubit>().state.when(
-                              initial: () => -1,
-                              ChangeLanguage: (locale) {
-                                return locale.languageCode == langModel(context)[index].local ? index : -1;
-                              },
-                            ),
-                            img: langModel(context)[index].img,
-                            text: langModel(context)[index].title,
-                            index: index,
-                            onTap: () {
-                              context.read<MainCubit>().changeLanguage(Locale(langModel(context)[index].local));
-                              Navigator.of(context).pop();
-                            },
-                          ),
+          child: Padding(
+            padding: EdgeInsets.all(context.width * 0.04),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: context.height * 0.25,
+                  width: context.width,
+                  child: Center(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      separatorBuilder: (_, index) => 10.horizontalSpace,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 2,
+                      itemBuilder: (_, index) => SizedBox(
+                        width: 140.w,
+                        child: BuildContainer(
+                            indexBloc: context.watch<LocaleProvider>().locale.languageCode == langModel(context)[index].local
+                                ? index
+                                : -1,
+                          img: langModel(context)[index].img,
+                          text: langModel(context)[index].title,
+                          index: index,
+                          onTap: () {
+                            context.read<LocaleProvider>().setLocale(Locale(langModel(context)[index].local));
+                            Navigator.of(context).pop();
+                          },
                         ),
                       ),
                     ),
                   ),
-                  10.verticalSpace,
-                  MyButton(
-                    text: context.locale.close,
-                    onPressed: () {
-                      context.pop();
-                    },
-                  ),
-                ],
-              ),
+                ),
+                10.verticalSpace,
+                MyButton(
+                  text: context.locale.close,
+                  onPressed: () {
+                    context.pop();
+                  },
+                ),
+              ],
             ),
           ),
         );
