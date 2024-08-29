@@ -2,7 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:unicode/core/utils/resources/extensions.dart';
 import 'package:unicode/features/home/data/models/coffee_model_entity.dart';
+import 'package:unicode/features/home/domain/use_cases/add_coffee_us.dart';
+import 'package:unicode/features/home/domain/use_cases/fetch_coffees_us.dart';
 import '../../domain/repositories/repo.dart';
+import '../../domain/use_cases/delete_coffee_us.dart';
 part 'home_state.dart';
 part 'home_cubit.freezed.dart';
 
@@ -14,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchCoffees() async {
     try {
       emit(const HomeState.CoffeeLoading());
-      final coffees = await repository.getAllCoffees();
+      final coffees = await FetchCoffeesUS(repository: repository)();
       emit(HomeState.CoffeeGetData(coffees));
     } catch (e) {
       emit(const HomeState.CoffeeError());
@@ -25,7 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(const HomeState.CoffeeLoading());
     try {
       await Future.delayed(180.duration);
-      await repository.addCoffee(coffee);
+      await AddCoffeeUS(repository: repository,coffee: coffee)();
       fetchCoffees();
       emit(const HomeState.CoffeeAdded());
     } catch (e) {
@@ -35,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> deleteCoffee(int coffee) async {
     try {
-      await repository.deleteCoffee(coffee);
+      await DeleteCoffeeUS(repository: repository,coffee: coffee)();
       fetchCoffees();
       emit(const HomeState.CoffeeDeleted("Done"));
     } catch (e) {

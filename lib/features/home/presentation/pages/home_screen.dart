@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:unicode/core/utils/resources/extensions.dart';
 import 'package:unicode/core/utils/shared_widgets/my_text.dart';
 import 'package:unicode/features/home/presentation/manager/home_cubit.dart';
-import 'package:unicode/features/home/presentation/widgets/add_order.dart';
 import '../../domain/use_cases/bottom_sheep.dart';
 import '../widgets/build_items_home.dart';
 import '../widgets/change_language.dart';
@@ -62,10 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     return 10.verticalSpace;
                   },
                   itemBuilder: (context, index) {
-                    return BuildItemsHome(
-                      index: data[index].index,
-                      name: data[index].name,
-                      cubit: cubit,
+                    return ElasticInLeft(
+                      duration: Duration(milliseconds: index * 100),
+                      child: BuildItemsHome(
+                        index: data[index].index,
+                        name: data[index].name,
+                        cubit: cubit,
+                      ),
                     );
                   },
                 ),
@@ -74,11 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return Card(
+                      return const Card(
                         child: ListTile(
                           title: Text('-----------------'),
-                          subtitle: const Text('---------------'),
-                          trailing: const Icon(Icons.ac_unit),
+                          subtitle: Text('---------------'),
+                          trailing: Icon(Icons.ac_unit),
                         ),
                       );
                     },

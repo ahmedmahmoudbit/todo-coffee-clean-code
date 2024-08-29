@@ -50,6 +50,7 @@ dependencies:
   skeletonizer: ^1.4.2
   once: ^1.6.3
   provider: ^6.1.2
+  animate_do: ^3.3.4
 
 
 
