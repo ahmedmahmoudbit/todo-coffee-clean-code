@@ -1,6 +1,10 @@
 
 ### ✌&ensp;Preview
 
+You can download the trial version and try the application (Android)
+
+https://drive.google.com/file/d/1dJ9fa9rI3cU_pnRjvBHgGFEK8-g8W_fZ/view?usp=sharing
+
 |              Change Language             |             Home           |             En           |
 | :----------------------------------: | :----------------------------------: | :----------------------------------: |
 <a href="https://github.com/user-attachments/assets/5ff38651-8133-4661-9ba3-8c333791182e" target="_blank"><img src="https://github.com/user-attachments/assets/5ff38651-8133-4661-9ba3-8c333791182e" width="250"></a> | <a href="" target="_blank"><img src="https://github.com/user-attachments/assets/a91c7b73-f068-4ec0-adcd-f93a9f85b555" width="250"></a> | <a href="" target="_blank"><img src="https://github.com/user-attachments/assets/d5c67197-5029-4a3b-abd4-fa6d185a0e69" width="250"></a> |
