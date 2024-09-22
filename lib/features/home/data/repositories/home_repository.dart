@@ -16,12 +16,13 @@ class HomeRepository implements HomeRepositoryBase {
   @override
   Future<List<CoffeeModelEntity>> getAllCoffees() async {
     List<CoffeeModelEntity> remoteCoffees = [];
-    await Once.runCustom('6h',
+    await Once.runCustom(
+        '6h',
         callback: () async {
           remoteCoffees = await firebaseDataSource.fetchCoffees();
           hiveDataSource.saveCoffees(remoteCoffees);
         },
-        duration: const Duration(hours: 6),
+        duration: const Duration(days: 6),
         fallback: () async {
           remoteCoffees =  await hiveDataSource.getCoffees();
         });
