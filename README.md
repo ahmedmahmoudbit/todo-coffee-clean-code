@@ -12,4 +12,4 @@ https://drive.google.com/file/d/1dJ9fa9rI3cU_pnRjvBHgGFEK8-g8W_fZ/view?usp=shari
 
 |              Add             |             Delete           |
 | :----------------------------------: | :----------------------------------: |
-<a href="" target="_blank"><img src="https://github.com/user-attachments/assets/1ca0564f-1711-4c7d-a8fe-d9e5a7e5c471" width="250"></a> | <a href="https://github.com/ahmedmahmoudbit/collection-apps/blob/morakeb/lib/widgets/bottom_navigation.dart" target="_blank"><img src="https://github.com/user-attachments/assets/518d25a1-af86-4e32-b864-f9b047eaabef" width="250"></a> |
+<a href="" target="_blank"><img src="https://github.com/user-attachments/assets/1ca0564f-1711-4c7d-a8fe-d9e5a7e5c471" width="250"></a> | <a href="https://github.com/ahmedmahmoudbit/todo-coffee-clean-code/blob/master/lib/features/home/presentation/widgets/dialog_delete.dart" target="_blank"><img src="https://github.com/user-attachments/assets/518d25a1-af86-4e32-b864-f9b047eaabef" width="250"></a> |
